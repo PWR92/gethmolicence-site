@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Get HMO Licence: Property Details</title>
+<meta name="description" content="Tell us your property details and upload your certificates so we can prepare your HMO licence application.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ Design tokens (BulkYard 2025 system, AppealPilot palette) ============ */
+  :root {
+    --navy: #1a2b4a;
+    --navy-soft: #24365c;
+    --green: #2e7d4f;
+    --green-hover: #256a41;
+    --green-ring: rgba(46,125,79,0.2);
+    --green-tint: #eaf4ee;
+    --bg: #f7f6f2;
+    --text: #222;
+    --text-secondary: #57534e;
+    --text-muted: #78716c;
+    --border: #e7e5e4;
+    --border-input: #d6d3d1;
+    --border-input-hover: #a8a29e;
+    --surface: #ffffff;
+    --footer-text: #cbd5e1;
+    --fs-xs: 12px;  --lh-xs: 16px;
+    --fs-sm: 14px;  --lh-sm: 20px;
+    --fs-base: 16px; --lh-base: 24px;
+    --fs-lg: 18px;  --lh-lg: 28px;
+    --fs-xl: 20px;  --lh-xl: 28px;
+    --fs-2xl: 24px; --lh-2xl: 32px;
+    --fs-3xl: 30px; --lh-3xl: 36px;
+    --fs-4xl: 36px; --lh-4xl: 40px;
+    --fs-5xl: 48px; --lh-5xl: 52px;
+    --r-md: 8px; --r-lg: 10px; --r-xl: 12px; --r-2xl: 16px; --r-full: 9999px;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-card-hover: 0 10px 15px -3px rgba(0,0,0,0.08);
+    --shadow-elevated: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --t-fast: 100ms; --t-normal: 200ms; --t-slow: 300ms;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: var(--fs-base);
+    line-height: var(--lh-base);
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width:680px; margin:0 auto; padding:0 16px; }
+  @media (min-width:768px)  { .container { padding:0 24px; } }
+
+  .hero { padding:40px 0 24px; text-align:center; }
+  @media (min-width:768px) { .hero { padding:56px 0 28px; } }
+
+  .hero h1 {
+    font-size: var(--fs-3xl);
+    line-height: var(--lh-3xl);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    color:var(--navy);
+    margin-bottom:12px;
+  }
+  @media (min-width:768px) {
+    .hero h1 { font-size:var(--fs-4xl); line-height:var(--lh-4xl); }
+  }
+  .hero p.sub {
+    font-size: var(--fs-base);
+    line-height: var(--lh-base);
+    color: var(--text-secondary);
+    max-width:560px;
+    margin:0 auto;
+    text-align:left;
+  }
+
+  .card {
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--r-xl);
+    padding:24px;
+    margin:0 auto 40px;
+    box-shadow:var(--shadow-elevated);
+  }
+  @media (min-width:768px) { .card { padding:32px; } }
+
+  .field { margin-bottom:22px; }
+  .field > label {
+    display:block;
+    font-size:var(--fs-sm);
+    line-height:var(--lh-sm);
+    font-weight:600;
+    color:var(--navy);
+    margin-bottom:8px;
+  }
+  .field .req { color:var(--green); font-weight:700; }
+  .field .hint {
+    display:block;
+    font-size:var(--fs-xs);
+    line-height:var(--lh-xs);
+    color:var(--text-muted);
+    font-weight:400;
+    margin-top:2px;
+  }
+
+  /* Two-up rows that collapse to one column on small screens */
+  .field-row { display:grid; grid-template-columns:1fr; gap:0 16px; }
+  @media (min-width:560px) { .field-row { grid-template-columns:1fr 1fr; } }
+
+  input[type=text], input[type=tel], input[type=email], input[type=date], input[type=file], textarea, select {
+    width:100%;
+    padding:12px 16px;
+    font-family:inherit;
+    font-size:var(--fs-base);
+    border:2px solid var(--border-input);
+    border-radius:var(--r-xl);
+    background:var(--surface);
+    color:var(--text);
+    transition:border-color var(--t-normal), box-shadow var(--t-normal);
+  }
+  input[type=text], input[type=tel], input[type=email], input[type=date], select { min-height:48px; }
+  textarea { min-height:96px; resize:vertical; line-height:var(--lh-base); }
+  input:hover, textarea:hover, select:hover { border-color:var(--border-input-hover); }
+  input:focus, textarea:focus, select:focus { outline:none; border-color:var(--green); box-shadow:0 0 0 3px var(--green-ring); }
+  input[type=file] { padding:10px 16px; font-size:var(--fs-sm); color:var(--text-secondary); cursor:pointer; }
+  input[type=file]::file-selector-button {
+    font-family:inherit; font-size:var(--fs-sm); font-weight:600;
+    color:var(--navy); background:var(--green-tint);
+    border:1px solid var(--border); border-radius:var(--r-md);
+    padding:8px 14px; margin-right:14px; cursor:pointer;
+  }
+
+  .section-head {
+    font-size:var(--fs-lg);
+    line-height:var(--lh-lg);
+    font-weight:700;
+    color:var(--navy);
+    letter-spacing:-0.01em;
+    margin:8px 0 4px;
+  }
+  .section-sub {
+    font-size:var(--fs-sm);
+    line-height:var(--lh-sm);
+    color:var(--text-secondary);
+    margin-bottom:20px;
+  }
+  hr { border:none; border-top:1px solid var(--border); margin:28px 0; }
+
+  button {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:100%;
+    min-height:52px;
+    padding:16px 28px;
+    font-family:inherit;
+    font-size:var(--fs-base);
+    font-weight:600;
+    color:#fff;
+    background:var(--green);
+    border:none;
+    border-radius:var(--r-lg);
+    cursor:pointer;
+    transition:background var(--t-normal), box-shadow var(--t-normal);
+  }
+  button:hover { background:var(--green-hover); box-shadow:var(--shadow-card-hover); }
+  button:focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+
+  .note {
+    font-size:var(--fs-sm); line-height:var(--lh-sm);
+    color:var(--navy);
+    margin-bottom:20px;
+    background:var(--green-tint);
+    border:1px solid var(--border);
+    border-radius:var(--r-md);
+    padding:12px 16px;
+  }
+  .consent { display:flex; align-items:flex-start; gap:10px; margin-bottom:20px; }
+  .consent input[type=checkbox] { width:18px; height:18px; min-height:0; margin-top:2px; flex:0 0 auto; accent-color:var(--green); cursor:pointer; }
+  .consent label { font-size:var(--fs-sm); line-height:var(--lh-sm); font-weight:400; color:var(--text-secondary); cursor:pointer; }
+  .trust-line { font-size:var(--fs-xs); line-height:var(--lh-xs); color:var(--text-muted); text-align:center; margin-top:12px; }
+  .hidden { position:absolute; left:-9999px; }
+
+  footer {
+    background:var(--navy);
+    color:var(--footer-text);
+    font-size:var(--fs-xs);
+    line-height:var(--lh-xs);
+    padding:24px 0;
+  }
+  footer a { color:var(--footer-text); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <h1>Get HMO Licence: Property Details</h1>
+    <p class="sub">Takes about a minute. Everything here is needed for your council application, so please fill it all in &mdash; the certificates at the bottom are the only thing you can send later if you don't have them to hand.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <!-- Netlify Forms: static markup so the build bots detect the form; multipart for file uploads -->
+    <form name="full-property-details" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/thanks-intake.html">
+      <input type="hidden" name="form-name" value="full-property-details">
+      <input type="hidden" name="ref" id="ref" value="">
+      <input type="hidden" name="ad_source" class="js-ad-source" value="direct">
+      <input type="hidden" name="gclid" class="js-gclid" value="">
+      <p class="hidden"><label>Leave this blank: <input name="bot-field"></label></p>
+
+      <div class="section-head">The property</div>
+
+      <div class="field">
+        <label for="address-line-1">Address line 1</label>
+        <input type="text" id="address-line-1" name="address-line-1" autocomplete="address-line1" required>
+      </div>
+
+      <div class="field">
+        <label for="address-line-2">Address line 2 <span class="hint">optional</span></label>
+        <input type="text" id="address-line-2" name="address-line-2" autocomplete="address-line2">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="address-town">Town / City</label>
+          <input type="text" id="address-town" name="address-town" autocomplete="address-level2" required>
+        </div>
+        <div class="field">
+          <label for="address-postcode">Postcode</label>
+          <input type="text" id="address-postcode" name="address-postcode" autocomplete="postal-code" autocapitalize="characters" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="property-type">Property type</label>
+        <select id="property-type" name="property-type" required>
+          <option value="">Select&hellip;</option>
+          <option>Mid-terrace house</option>
+          <option>End-terrace house</option>
+          <option>Semi-detached house</option>
+          <option>Detached house</option>
+          <option>Flat</option>
+          <option>Converted building</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="floors">Number of floors / storeys</label>
+          <select id="floors" name="floors" required>
+            <option value="">Select&hellip;</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bedrooms">Number of bedrooms / letting rooms</label>
+          <select id="bedrooms" name="bedrooms-count" required>
+            <option value="">Select&hellip;</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+            <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+            <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="room-sizes">Rough size of each bedroom
+          <span class="hint">Councils check rooms against minimum size rules, so rough measurements help (e.g. "3 beds: 12 sqm, 10 sqm, 7 sqm").</span>
+        </label>
+        <textarea id="room-sizes" name="room-sizes" required></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="bathrooms">Number of bathrooms</label>
+          <select id="bathrooms" name="bathrooms-count" required>
+            <option value="">Select&hellip;</option>
+            <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="showers">Number of showers</label>
+          <select id="showers" name="showers-count" required>
+            <option value="">Select&hellip;</option>
+            <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="wcs">Number of WCs</label>
+          <select id="wcs" name="wcs-count" required>
+            <option value="">Select&hellip;</option>
+            <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="kitchens">Number of kitchens</label>
+          <select id="kitchens" name="kitchens-count" required>
+            <option value="">Select&hellip;</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="tenants">Number of tenants</label>
+          <select id="tenants" name="tenants-count" required>
+            <option value="">Select&hellip;</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+            <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+            <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="households">Number of households
+            <span class="hint">A household is one person or one family/couple. Unrelated sharers each count separately.</span>
+          </label>
+          <select id="households" name="households-count" required>
+            <option value="">Select&hellip;</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+            <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+            <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+          </select>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="section-head">Who holds the licence</div>
+      <div class="section-sub">The person responsible for the property.</div>
+
+      <div class="field">
+        <label for="holder-name">Full name</label>
+        <input type="text" id="holder-name" name="licence-holder-name" autocomplete="name" required>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="holder-email">Email</label>
+          <input type="email" id="holder-email" name="licence-holder-email" inputmode="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="holder-phone">Phone</label>
+          <input type="tel" id="holder-phone" name="licence-holder-phone" autocomplete="tel" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="holder-dob">Date of birth</label>
+        <input type="date" id="holder-dob" name="licence-holder-dob" required>
+      </div>
+
+      <div class="field">
+        <label for="holder-address-line-1">Home address line 1</label>
+        <input type="text" id="holder-address-line-1" name="licence-holder-address-line-1" autocomplete="address-line1" required>
+      </div>
+
+      <div class="field">
+        <label for="holder-address-line-2">Home address line 2 <span class="hint">optional</span></label>
+        <input type="text" id="holder-address-line-2" name="licence-holder-address-line-2" autocomplete="address-line2">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="holder-address-town">Town / City</label>
+          <input type="text" id="holder-address-town" name="licence-holder-address-town" autocomplete="address-level2" required>
+        </div>
+        <div class="field">
+          <label for="holder-address-postcode">Postcode</label>
+          <input type="text" id="holder-address-postcode" name="licence-holder-address-postcode" autocomplete="postal-code" autocapitalize="characters" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="holder-interest">Your interest in the property</label>
+        <select id="holder-interest" name="licence-holder-interest" required>
+          <option value="">Select&hellip;</option>
+          <option>Owner</option>
+          <option>Freeholder</option>
+          <option>Leaseholder (long lease)</option>
+          <option>Managing agent</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="manager-name">Property manager &mdash; full name <span class="hint">optional</span>
+            <span class="hint">Only if someone other than you manages it day-to-day. The council needs their details too, as they must also be a "fit and proper person".</span>
+          </label>
+          <input type="text" id="manager-name" name="manager-name" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="manager-phone">Property manager &mdash; phone <span class="hint">optional</span></label>
+          <input type="tel" id="manager-phone" name="manager-phone" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="other-hmos">Other HMO licences <span class="hint">optional</span>
+          <span class="hint">List any other HMOs you own or manage, and any HMO licence you've held &mdash; or been refused or had revoked &mdash; before. Write "none" if this is your only one.</span>
+        </label>
+        <textarea id="other-hmos" name="other-hmo-licences"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="holder-other">Other parties <span class="hint">optional</span>
+          <span class="hint">Note any freeholder, mortgage lender or managing agent the council must be told about.</span>
+        </label>
+        <textarea id="holder-other" name="licence-holder-other"></textarea>
+      </div>
+
+      <hr>
+
+      <div class="section-head">Safety alarms</div>
+      <div class="section-sub">These are now legal requirements &mdash; just confirm what's in place.</div>
+
+      <div class="field">
+        <label for="alarm-smoke">Smoke alarm on each floor?</label>
+        <select id="alarm-smoke" name="alarm-smoke-each-floor" required>
+          <option value="">Select&hellip;</option>
+          <option>Yes</option>
+          <option>No</option>
+          <option>Not sure</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="alarm-heat">Heat alarm in the kitchen?</label>
+        <select id="alarm-heat" name="alarm-heat-kitchen" required>
+          <option value="">Select&hellip;</option>
+          <option>Yes</option>
+          <option>No</option>
+          <option>Not sure</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="alarm-co">Carbon monoxide alarm where there's a fuel-burning appliance?</label>
+        <select id="alarm-co" name="alarm-co" required>
+          <option value="">Select&hellip;</option>
+          <option>Yes</option>
+          <option>No</option>
+          <option>Not sure</option>
+        </select>
+      </div>
+
+      <hr>
+
+      <div class="section-head">Your certificates</div>
+      <div class="section-sub">Attach whatever you have. All optional &mdash; if one isn't ready, leave it and submit again later. PDF or a clear photo is fine.</div>
+      <div class="note">If a file won't upload, it's too large &mdash; just reply to my email with that one attached instead.</div>
+
+      <div class="field">
+        <label for="gas">Gas safety certificate <span class="hint">within the last 12 months</span></label>
+        <input type="file" id="gas" name="gas-certificate" accept=".pdf,image/*">
+      </div>
+
+      <div class="field">
+        <label for="eicr">EICR &mdash; electrical condition report <span class="hint">within the last 5 years</span></label>
+        <input type="file" id="eicr" name="eicr" accept=".pdf,image/*">
+      </div>
+
+      <div class="field">
+        <label for="epc">EPC &mdash; energy performance certificate</label>
+        <input type="file" id="epc" name="epc" accept=".pdf,image/*">
+      </div>
+
+      <div class="field">
+        <label for="fire">Fire alarm / smoke detection certificate</label>
+        <input type="file" id="fire" name="fire-alarm-certificate" accept=".pdf,image/*">
+      </div>
+
+      <div class="field">
+        <label for="other">Anything else <span class="hint">floor plan or any other document &mdash; you can attach more than one</span></label>
+        <input type="file" id="other" name="other-documents" accept=".pdf,image/*" multiple>
+      </div>
+
+      <hr>
+
+      <div class="section-head">Confirm and send</div>
+
+      <div class="field">
+        <label for="record-disclosure">Anything the council should know? <span class="hint">optional</span>
+          <span class="hint">For example: an unspent conviction, a banning order, a previously refused or revoked licence, or any housing enforcement action. We'll talk you through it &mdash; leaving this blank means none of these apply.</span>
+        </label>
+        <textarea id="record-disclosure" name="record-disclosure"></textarea>
+      </div>
+
+      <div class="consent">
+        <input type="checkbox" id="declaration-consent" name="declaration-consent" value="Yes" required>
+        <label for="declaration-consent">I confirm the information above is correct to the best of my knowledge, and I'm happy for Get HMO Licence to use it to prepare and submit my council application.</label>
+      </div>
+
+      <button type="submit">Send my details</button>
+      <p class="trust-line">Goes straight to Patrick at Get HMO Licence &middot; no account needed</p>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>Get HMO Licence provides document preparation and application-handling services. We are not a law firm and do not provide legal advice. &copy; 2026 &middot; <a href="privacy.html">Privacy</a></p>
+  </div>
+</footer>
+
+<script>
+  // Per-lead pre-fill: each emailed link carries ?ref=GH-1XX&addr=...&pc=...
+  // ref tags the submission to the right invoice; town/postcode pre-fill to cut friction.
+  (function () {
+    try {
+      var p = new URLSearchParams(window.location.search);
+      var ref = p.get('ref');
+      if (ref) document.getElementById('ref').value = ref;
+
+      var addr = p.get('addr') || '';
+      var pc = p.get('pc') || '';
+      if (addr) document.getElementById('address-town').value = addr;
+      if (pc) document.getElementById('address-postcode').value = pc;
+
+      // Ad attribution (belt-and-braces): restore tags captured earlier this
+      // session on penalty/index, or read them if present on this URL.
+      var KEYS = ['gclid','kw','mt','dev','net','cmp','adg'];
+      var store = {};
+      KEYS.forEach(function (k) { var v = p.get(k); if (v) store[k] = v; });
+      if (Object.keys(store).length) {
+        try { sessionStorage.setItem('attr', JSON.stringify(store)); } catch (e) {}
+      } else {
+        try { store = JSON.parse(sessionStorage.getItem('attr') || '{}'); } catch (e) { store = {}; }
+      }
+      if (Object.keys(store).length) {
+        var parts = KEYS.filter(function (k) { return store[k]; })
+                        .map(function (k) { return k + '=' + store[k]; });
+        var val = 'ads:' + parts.join('|');
+        var src = document.querySelectorAll('.js-ad-source');
+        for (var i = 0; i < src.length; i++) src[i].value = val;
+        if (store.gclid) {
+          var gf = document.querySelectorAll('.js-gclid');
+          for (var j = 0; j < gf.length; j++) gf[j].value = store.gclid;
+        }
+      }
+    } catch (e) { /* leave fields blank */ }
+  })();
+</script>
+
+</body>
+</html>
